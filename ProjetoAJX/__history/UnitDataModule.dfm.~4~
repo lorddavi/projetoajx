@@ -1,0 +1,45 @@
+object DM: TDM
+  OldCreateOrder = False
+  Height = 343
+  Width = 565
+  object ZConnection: TZConnection
+    ControlsCodePage = cCP_UTF16
+    Catalog = ''
+    Connected = True
+    HostName = ''
+    Port = 3306
+    Database = 'projetoajx'
+    User = 'root'
+    Password = ''
+    Protocol = 'mysql-5'
+    Left = 256
+    Top = 8
+  end
+  object ZQueryCliente: TZQuery
+    Connection = ZConnection
+    Active = True
+    SQL.Strings = (
+      'select * from clientes')
+    Params = <>
+    Left = 256
+    Top = 72
+    object ZQueryClienteid_cliente: TIntegerField
+      FieldName = 'id_cliente'
+      Required = True
+    end
+    object ZQueryClientenome_cliente: TWideStringField
+      FieldName = 'nome_cliente'
+      Required = True
+      Size = 50
+    end
+    object ZQueryClienteemail_cliente: TWideStringField
+      FieldName = 'email_cliente'
+      Size = 50
+    end
+    object ZQueryClientecpf_cliente: TWideStringField
+      FieldName = 'cpf_cliente'
+      Required = True
+      Size = 15
+    end
+  end
+end

@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2016/09/14 19:32:54.000.181,=C:\Users\Davi\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2016/09/14 20:00:45.000.114,=C:\Users\Davi\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2016/09/16 00:55:56.000.479,=C:\Users\Davi\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2016/10/05 20:12:59.000.275,=C:\Users\Davi\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2016/10/05 21:57:49.000.299,=C:\Users\Davi\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2016/11/09 19:34:58.000.887,=C:\Users\Davi\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2016/11/09 19:36:18.000.751,=C:\Users\Davi\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/03/23 19:45:19.000.252,=C:\Users\Davi\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/05/24 09:58:09.000.357,=C:\Users\Pichau\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/05/24 10:00:26.000.983,C:\Users\Pichau\Documents\Embarcadero\Studio\Projects\Unit1.pas=C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\UnitPrincipal.pas</Transaction>
+    <Transaction>2019/05/24 10:00:26.000.983,C:\Users\Pichau\Documents\Embarcadero\Studio\Projects\Unit1.dfm=C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\UnitPrincipal.dfm</Transaction>
+    <Transaction>2019/05/24 10:00:37.000.626,C:\Users\Pichau\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\ProjetoAJX.dproj</Transaction>
+    <Transaction>2019/05/24 10:46:13.000.192,=C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\Unit1.pas</Transaction>
+    <Transaction>2019/05/24 10:48:03.000.575,C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\UnitCadastroClientes.pas=C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\Unit1.pas</Transaction>
+    <Transaction>2019/05/24 10:48:03.000.575,C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\UnitCadastroClientes.dfm=C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\Unit1.dfm</Transaction>
+    <Transaction>2019/05/24 18:33:32.000.819,=C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\Unit1.pas</Transaction>
+    <Transaction>2019/05/24 18:34:22.000.053,C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\Unit1.pas=C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\UnitCadastroProdutos.pas</Transaction>
+    <Transaction>2019/05/24 18:34:22.000.053,C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\Unit1.dfm=C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\UnitCadastroProdutos.dfm</Transaction>
+    <Transaction>2019/05/24 18:53:36.000.583,=C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\Unit1.pas</Transaction>
+    <Transaction>2019/05/24 18:54:55.000.753,C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\Unit1.dfm=C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\UnitNovaVenda.dfm</Transaction>
+    <Transaction>2019/05/24 18:54:55.000.753,C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\Unit1.pas=C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\UnitNovaVenda.pas</Transaction>
+    <Transaction>2019/05/25 13:11:14.000.839,=C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\Unit1.pas</Transaction>
+    <Transaction>2019/05/25 13:11:49.000.233,C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\UnitCliente.pas=C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\Unit1.pas</Transaction>
+    <Transaction>2019/05/25 13:30:00.000.420,=C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\Unit1.pas</Transaction>
+    <Transaction>2019/05/25 13:30:10.000.259,C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\UnitProduto.pas=C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\Unit1.pas</Transaction>
+    <Transaction>2019/05/25 13:35:02.000.109,=C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\Unit1.pas</Transaction>
+    <Transaction>2019/05/25 13:35:12.000.998,C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\UnitVenda.pas=C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\Unit1.pas</Transaction>
+    <Transaction>2019/05/25 13:42:51.000.596,=C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\Unit1.pas</Transaction>
+    <Transaction>2019/05/25 13:43:04.000.174,C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\UnitEndereco.pas=C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\Unit1.pas</Transaction>
+    <Transaction>2019/05/25 14:02:14.000.148,=C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\Unit1.pas</Transaction>
+    <Transaction>2019/05/25 14:02:24.000.503,C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\UnitListaProduto.pas=C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\Unit1.pas</Transaction>
+    <Transaction>2019/05/25 14:25:05.000.539,=C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\Unit1.pas</Transaction>
+    <Transaction>2019/05/25 14:25:30.000.305,C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\UnitDataModule.pas=C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\Unit1.pas</Transaction>
+    <Transaction>2019/05/25 14:25:30.000.305,C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\UnitDataModule.dfm=C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\Unit1.dfm</Transaction>
+    <Transaction>2019/05/25 15:23:30.000.737,=C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\Unit1.pas</Transaction>
+    <Transaction>2019/05/25 15:25:28.000.029,C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\UnitTelefone.pas=C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\Unit1.pas</Transaction>
+    <Transaction>2019/05/27 02:05:40.000.402,=C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\Unit1.pas</Transaction>
+    <Transaction>2019/05/27 02:08:19.000.699,C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\UnitCarrinho.pas=C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\Unit1.pas</Transaction>
+    <Transaction>2019/05/27 23:03:06.000.946,=C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\Unit1.pas</Transaction>
+    <Transaction>2019/05/27 23:04:10.000.504,C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\Unit1.pas=C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\UnitFormRelatorio.pas</Transaction>
+    <Transaction>2019/05/27 23:04:10.000.504,C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\Unit1.dfm=C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\UnitFormRelatorio.dfm</Transaction>
+    <Transaction>2019/05/29 19:14:22.000.840,C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\UnitListaProduto.pas=</Transaction>
+    <Transaction>2019/05/30 12:18:11.750,=C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\Unit1.pas</Transaction>
+    <Transaction>2019/05/30 12:20:32.958,C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\UnitFormHistorico.dfm=C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\Unit1.dfm</Transaction>
+    <Transaction>2019/05/30 12:20:32.958,C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\UnitFormHistorico.pas=C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\Unit1.pas</Transaction>
+    <Transaction>2019/05/30 13:47:16.378,=C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\Unit1.pas</Transaction>
+    <Transaction>2019/05/30 13:51:39.937,C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\UnitFormVendaConcluida.dfm=C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\Unit1.dfm</Transaction>
+    <Transaction>2019/05/30 13:51:39.937,C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\UnitFormVendaConcluida.pas=C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\Unit1.pas</Transaction>
+    <Transaction>2019/05/30 14:30:53.388,C:\Users\Pichau\Downloads\Eduvale\ProjetoAJX\UnitFormVendaConcluida.pas=</Transaction>
+  </Transactions>
+	<ActiveMobileDevice>
+		<NoProfile iOSSimulator="iPhone5"/>
+	</ActiveMobileDevice>
+</BorlandProject>

@@ -1,0 +1,43 @@
+unit UnitVenda;
+
+interface
+
+  type
+
+    TVenda = class
+
+    private
+      FID_Cliente: integer;
+      FID: integer;
+      FData: TDate;
+      procedure SetData(const Value: TDate);
+      procedure SetID(const Value: integer);
+      procedure SetID_Cliente(const Value: integer);
+
+    published
+      property ID: integer read FID write SetID;
+      property Data: TDate read FData write SetData;
+      property ID_Cliente: integer read FID_Cliente write SetID_Cliente;
+      //property ID_Carrinho
+
+    end;
+implementation
+
+{ TVenda }
+
+procedure TVenda.SetData(const Value: TDate);
+begin
+  FData := Value;
+end;
+
+procedure TVenda.SetID(const Value: integer);
+begin
+  FID := Value;
+end;
+
+procedure TVenda.SetID_Cliente(const Value: integer);
+begin
+  FID_Cliente := Value;
+end;
+
+end.

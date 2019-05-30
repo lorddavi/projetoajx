@@ -1,0 +1,23 @@
+unit UnitCliente;
+
+interface
+  type
+    TCliente = class
+
+    private
+
+    public
+
+    published
+      property ID: Integer;
+      property Nome: String;
+      property CPF: String;
+      property Email: String;
+      //Property Telefone
+      //Property Endereco
+
+    end;
+
+implementation
+
+end.

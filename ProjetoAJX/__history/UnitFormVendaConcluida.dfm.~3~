@@ -1,0 +1,105 @@
+object FormVendaConcluida: TFormVendaConcluida
+  Left = 0
+  Top = 0
+  Caption = 'FormVendaConcluida'
+  ClientHeight = 325
+  ClientWidth = 794
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object RLReport1: TRLReport
+    Left = 0
+    Top = 0
+    Width = 794
+    Height = 1123
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -13
+    Font.Name = 'Arial'
+    Font.Style = []
+    Title = 'Venda Conclu'#237'da'
+    object RLBandTopo: TRLBand
+      Left = 38
+      Top = 38
+      Width = 718
+      Height = 19
+      BandType = btHeader
+      Color = 12615680
+      ParentColor = False
+      Transparent = False
+      object RLLabel1: TRLLabel
+        Left = 0
+        Top = 0
+        Width = 79
+        Height = 16
+        Align = faLeftTop
+        Caption = 'Projeto AJX'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+      end
+      object RLSystemInfo1: TRLSystemInfo
+        Left = 339
+        Top = 0
+        Width = 40
+        Height = 16
+        Align = faCenterTop
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        Info = itTitle
+        ParentFont = False
+        Text = ''
+        Transparent = False
+      end
+      object RLSystemInfo2: TRLSystemInfo
+        Left = 586
+        Top = 0
+        Width = 132
+        Height = 16
+        Align = faRightTop
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        Info = itPageNumber
+        ParentFont = False
+        Text = 'P'#225'g.: '
+        Transparent = False
+      end
+    end
+    object RLBand2: TRLBand
+      Left = 38
+      Top = 57
+      Width = 718
+      Height = 16
+      BandType = btColumnHeader
+    end
+    object RLBand3: TRLBand
+      Left = 38
+      Top = 73
+      Width = 718
+      Height = 16
+    end
+    object RLBand4: TRLBand
+      Left = 38
+      Top = 89
+      Width = 718
+      Height = 16
+      BandType = btFooter
+    end
+  end
+end

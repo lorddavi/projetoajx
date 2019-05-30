@@ -1,0 +1,34 @@
+unit UnitDataModule;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, ZAbstractConnection, ZConnection, Data.DB,
+  ZAbstractRODataset, ZAbstractDataset, ZDataset;
+
+type
+  TDM = class(TDataModule)
+    ZConnection: TZConnection;
+    ZQueryCliente: TZQuery;
+    ZQueryClienteid_cliente: TIntegerField;
+    ZQueryClientenome_cliente: TWideStringField;
+    ZQueryClienteemail_cliente: TWideStringField;
+    ZQueryClientecpf_cliente: TWideStringField;
+    ZQuery1: TZQuery;
+    ZQueryEndereco: TZQuery;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  DM: TDM;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+end.

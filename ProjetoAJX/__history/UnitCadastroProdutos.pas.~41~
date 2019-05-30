@@ -1,0 +1,212 @@
+unit UnitCadastroProdutos;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Data.DB, Vcl.Grids,
+  Vcl.DBGrids, Vcl.Mask, Vcl.DBCtrls, Vcl.Buttons, ZAbstractRODataset,
+  ZAbstractDataset, ZDataset, Vcl.ExtCtrls, System.ImageList, Vcl.ImgList;
+
+type
+  TFormCadastroProdutos = class(TForm)
+    GBProduto: TGroupBox;
+    GBBusca: TGroupBox;
+    DBEditCod: TDBEdit;
+    DBEditQtd: TDBEdit;
+    DBEditNome: TDBEdit;
+    DBEditValor: TDBEdit;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    EditBusca: TEdit;
+    DBGridProdutos: TDBGrid;
+    ZQueryProdutos: TZQuery;
+    DataSourceProd: TDataSource;
+    btnExcluir: TButton;
+    btnNovo: TButton;
+    btnEditar: TButton;
+    btnSalvar: TButton;
+    btnCancelar: TButton;
+    RadioGroupCriterio: TRadioGroup;
+    ImageList1: TImageList;
+    ZQueryProdutosid_produto: TIntegerField;
+    ZQueryProdutoscodigo_produto: TWideStringField;
+    ZQueryProdutosnome_produto: TWideStringField;
+    ZQueryProdutosqtd_produto: TIntegerField;
+    ZQueryProdutosvalor_produto: TFloatField;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnNovoClick(Sender: TObject);
+    procedure btnSalvarClick(Sender: TObject);
+    procedure btnEditarClick(Sender: TObject);
+    procedure btnExcluirClick(Sender: TObject);
+    procedure btnCancelarClick(Sender: TObject);
+    procedure EditBuscaChange(Sender: TObject);
+    procedure ZQueryProdutosBeforePost(DataSet: TDataSet);
+    procedure ZQueryProdutosAfterPost(DataSet: TDataSet);
+    procedure abreCampos();
+    procedure fechaCampos();
+    function verificaBrancos(): Boolean;
+
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormCadastroProdutos: TFormCadastroProdutos;
+
+implementation
+
+{$R *.dfm}
+
+uses UnitDataModule, UnitProduto;
+
+procedure TFormCadastroProdutos.abreCampos;
+begin
+  DBEditNome.Enabled := true;
+  DBEditCod.Enabled := true;
+  DBEditQtd.Enabled := true;
+  DBEditValor.Enabled := true;
+end;
+
+procedure TFormCadastroProdutos.btnCancelarClick(Sender: TObject);
+begin
+  ZQueryProdutos.Cancel;
+
+  btnEditar.Enabled := true;
+  btnNovo.Enabled := true;
+  btnSalvar.Enabled := false;
+  btnExcluir.Enabled := false;
+  btnCancelar.Enabled := false;
+
+  fechaCampos;
+end;
+
+procedure TFormCadastroProdutos.btnEditarClick(Sender: TObject);
+begin
+  abreCampos;
+
+  ZQueryProdutos.Edit;
+
+  btnEditar.Enabled := false;
+  btnNovo.Enabled := false;
+  btnSalvar.Enabled := false;
+  btnExcluir.Enabled := true;
+  btnCancelar.Enabled := true;
+end;
+
+procedure TFormCadastroProdutos.btnExcluirClick(Sender: TObject);
+begin
+  if (messageBox(HANDLE, 'Deseja realmente excluir esse registro?', 'Excluir',
+                        MB_YESNO + MB_ICONQUESTION) = ID_YES) then
+    begin
+      ZQueryProdutos.Delete;
+
+      btnEditar.Enabled := true;
+      btnNovo.Enabled := true;
+      btnSalvar.Enabled := false;
+      btnExcluir.Enabled := false;
+      btnCancelar.Enabled := false;
+
+      fechaCampos;
+    end;
+end;
+
+procedure TFormCadastroProdutos.btnNovoClick(Sender: TObject);
+begin
+    abreCampos;
+
+    ZQueryProdutos.Insert;
+
+    btnNovo.Enabled := false;
+	  btnEditar.Enabled :=  false;
+	  btnExcluir.Enabled := false;
+	  btnSalvar.Enabled := true;
+	  btnCancelar.Enabled := true;
+end;
+
+procedure TFormCadastroProdutos.btnSalvarClick(Sender: TObject);
+begin
+  //Verifica se há campos em branco
+  if (VerificaBrancos) then
+    begin
+      ZQueryProdutos.Post;
+      btnEditar.Enabled := true;
+      btnNovo.Enabled := true;
+      btnSalvar.Enabled := false;
+      btnExcluir.Enabled := false;
+      btnCancelar.Enabled := false;
+      fechaCampos;
+    end
+  else
+    begin
+      ShowMessage('Preencha os campos corretamente!');
+    end;
+end;
+
+procedure TFormCadastroProdutos.EditBuscaChange(Sender: TObject);
+begin
+  with ZQueryProdutos do
+    begin
+      Close;
+      if RadioGroupCriterio.ItemIndex = 1 then
+        SQL.Text := 'select * from produtos where nome_produto like :nome'
+      else
+        SQL.Text := 'select * from produtos where codigo_produto like :nome';
+      ParamByName('nome').Value := '%' + EditBusca.Text + '%';
+      Open;
+    end;
+end;
+
+procedure TFormCadastroProdutos.fechaCampos;
+begin
+  DBEditNome.Enabled := false;
+  DBEditCod.Enabled := false;
+  DBEditQtd.Enabled := false;
+  DBEditValor.Enabled := false;
+end;
+
+procedure TFormCadastroProdutos.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  FormCadastroProdutos := NIL;
+  Action := caFree;
+end;
+
+function TFormCadastroProdutos.verificaBrancos: Boolean;
+begin
+  if (DBEditNome.Text = '') OR (DBEditCod.Text = '') then
+    begin
+      Result := False;
+    end
+  else
+    begin
+      Result := True;
+    end;
+
+end;
+
+procedure TFormCadastroProdutos.ZQueryProdutosAfterPost(DataSet: TDataSet);
+begin
+  Application.MessageBox('Produto salvo com sucesso!', 'Produto Salvo');
+end;
+
+procedure TFormCadastroProdutos.ZQueryProdutosBeforePost(DataSet: TDataSet);
+  var produto : TProduto;
+begin
+  produto := TProduto.Create;
+  produto.Nome := DBEditNome.Text;
+  produto.Codigo := DBEditCod.Text;
+  produto.Qtd := StrToInt(DBEditQtd.Text);
+  produto.Valor := StrToFloat(DBEditValor.Text);
+
+  ZQueryProdutos.FieldByName('nome_produto').AsString := produto.Nome;
+  ZQueryProdutos.FieldByName('codigo_produto').AsString := produto.Codigo;
+  ZQueryProdutos.FieldByName('qtd_produto').AsInteger := produto.Qtd;
+  ZQueryProdutos.FieldByName('valor_produto').AsFloat := produto.Valor;
+end;
+
+end.

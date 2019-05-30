@@ -1,0 +1,75 @@
+unit UnitCliente;
+
+interface
+  type
+    TCliente = class
+
+    private
+    FEmail: string;
+    FCPF: string;
+    FID: integer;
+    FNome: string;
+    procedure SetCPF(const Value: string);
+    procedure SetEmail(const Value: string);
+    procedure SetID(const Value: integer);
+    procedure SetNome(const Value: string);
+    function getCPF: string;
+    function getEmail: string;
+    function getID: integer;
+    function getNome: string;
+
+    published
+      property ID: integer read getID write SetID;
+      property Nome: string read getNome write SetNome;
+      property CPF: string read getCPF write SetCPF;
+      property Email: string read getEmail write SetEmail;
+      //Property Telefone
+      //Property Endereco
+
+    end;
+
+implementation
+
+{ TCliente }
+
+function TCliente.getCPF: string;
+begin
+  Result := FCPF;
+end;
+
+function TCliente.getEmail: string;
+begin
+  Result := FEmail;
+end;
+
+function TCliente.getID: integer;
+begin
+  Result := FID;
+end;
+
+function TCliente.getNome: string;
+begin
+  Result := FNome;
+end;
+
+procedure TCliente.SetCPF(const Value: string);
+begin
+  FCPF := Value;
+end;
+
+procedure TCliente.SetEmail(const Value: string);
+begin
+  FEmail := Value;
+end;
+
+procedure TCliente.SetID(const Value: integer);
+begin
+  FID := Value;
+end;
+
+procedure TCliente.SetNome(const Value: string);
+begin
+  FNome := Value;
+end;
+
+end.

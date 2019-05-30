@@ -1,0 +1,59 @@
+unit UnitFormRelatorio;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, RLReport, Data.DB, ZAbstractRODataset,
+  ZAbstractDataset, ZDataset, UnitDataModule;
+
+type
+  TFormRelatorio = class(TForm)
+    RLReport1: TRLReport;
+    DataSourceVendas: TDataSource;
+    ZQueryVendas: TZQuery;
+    RLBand1: TRLBand;
+    RLBand2: TRLBand;
+    RLBand3: TRLBand;
+    RLLabel1: TRLLabel;
+    RLSystemInfo1: TRLSystemInfo;
+    RLSystemInfo2: TRLSystemInfo;
+    RLLabel2: TRLLabel;
+    RLLabel3: TRLLabel;
+    RLLabel4: TRLLabel;
+    RLDBTextCliente: TRLDBText;
+    RLDBText2: TRLDBText;
+    RLDBText3: TRLDBText;
+    ZQueryVendasid_venda: TIntegerField;
+    ZQueryVendasdata_venda: TDateField;
+    ZQueryVendasvalor_venda: TFloatField;
+    ZQueryVendasid_clientev: TIntegerField;
+    ZQueryCliente: TZQuery;
+    ZQueryClienteid_cliente: TIntegerField;
+    ZQueryClientenome_cliente: TWideStringField;
+    ZQueryClienteemail_cliente: TWideStringField;
+    ZQueryClientecpf_cliente: TWideStringField;
+    ZQueryVendasCliente: TStringField;
+    RLSystemInfo3: TRLSystemInfo;
+    RLSystemInfo4: TRLSystemInfo;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormRelatorio: TFormRelatorio;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFormRelatorio.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  FormRelatorio := NIL;
+  Action := caFree;
+end;
+
+end.

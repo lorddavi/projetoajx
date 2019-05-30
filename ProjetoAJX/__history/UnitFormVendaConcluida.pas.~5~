@@ -1,0 +1,53 @@
+unit UnitFormVendaConcluida;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, RLReport;
+
+type
+  TFormVendaConcluida = class(TForm)
+    RLReport1: TRLReport;
+    RLBandTopo: TRLBand;
+    RLBand2: TRLBand;
+    RLBand3: TRLBand;
+    RLBand4: TRLBand;
+    RLLabel1: TRLLabel;
+    RLSystemInfo1: TRLSystemInfo;
+    RLSystemInfo2: TRLSystemInfo;
+    RLLabel2: TRLLabel;
+    RLLabel3: TRLLabel;
+    RLLabel4: TRLLabel;
+    RLLabel5: TRLLabel;
+    RLSystemInfo3: TRLSystemInfo;
+    RLDBText1: TRLDBText;
+    RLDBText2: TRLDBText;
+    RLDBText3: TRLDBText;
+    RLDBText5: TRLDBText;
+    RLDBText6: TRLDBText;
+    RLLabel6: TRLLabel;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormVendaConcluida: TFormVendaConcluida;
+
+implementation
+
+{$R *.dfm}
+
+uses UnitNovaVenda;
+
+procedure TFormVendaConcluida.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  FormVendaConcluida := NIL;
+  Action := caFree;
+end;
+
+end.

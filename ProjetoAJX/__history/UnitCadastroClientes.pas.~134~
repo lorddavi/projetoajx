@@ -1,0 +1,469 @@
+unit UnitCadastroClientes;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask,
+  Data.DB, Vcl.Grids, Vcl.DBGrids, Vcl.Buttons, ZAbstractRODataset,
+  ZAbstractDataset, ZDataset, Vcl.ExtCtrls, System.ImageList, Vcl.ImgList;
+
+type
+  TFormCadastroClientes = class(TForm)
+    GBDadosPessoaisCliente: TGroupBox;
+    GBContatoCliente: TGroupBox;
+    DBEditNome: TDBEdit;
+    DBEditCPF: TDBEdit;
+    GBEndereco: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    DBEditEmail: TDBEdit;
+    DBEditTelefone: TDBEdit;
+    DBEditRua: TDBEdit;
+    DBEditNum: TDBEdit;
+    DBEditBairro: TDBEdit;
+    DBEditCidade: TDBEdit;
+    DBEditCEP: TDBEdit;
+    DBComboBoxUF: TDBComboBox;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    GBBusca: TGroupBox;
+    DBGridClientes: TDBGrid;
+    EditBusca: TEdit;
+    DataSourceCadCliente: TDataSource;
+    DataSourceEndereco: TDataSource;
+    DataSourceTelefone: TDataSource;
+    ZQueryEndereco: TZQuery;
+    ZQueryCliente: TZQuery;
+    ZQueryClienteid_cliente: TIntegerField;
+    ZQueryClientenome_cliente: TWideStringField;
+    ZQueryClienteemail_cliente: TWideStringField;
+    ZQueryClientecpf_cliente: TWideStringField;
+    ZQueryTel: TZQuery;
+    ZQueryEnderecoid_endereco: TIntegerField;
+    ZQueryEnderecorua_endereco: TWideStringField;
+    ZQueryEndereconum_endereco: TWideStringField;
+    ZQueryEnderecobairro_endereco: TWideStringField;
+    ZQueryEnderecocidade_endereco: TWideStringField;
+    ZQueryEnderecocep_endereco: TWideStringField;
+    ZQueryEnderecouf_endereco: TWideStringField;
+    ZQueryTelid_tel: TIntegerField;
+    ZQueryTelnum_tel: TWideStringField;
+    ZQueryTelid_clientet: TIntegerField;
+    btnEditar: TButton;
+    btnExcluir: TButton;
+    btnCancelar: TButton;
+    btnNovo: TButton;
+    btnSalvar: TButton;
+    btnNovoEndereco: TButton;
+    DBGridEndereco: TDBGrid;
+    ZQueryEnderecoid_clientee: TIntegerField;
+    btnDeletaEndereco: TButton;
+    RadioGroupCriterio: TRadioGroup;
+    ImageList1: TImageList;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnNovoClick(Sender: TObject);
+    procedure btnSalvarClick(Sender: TObject);
+    procedure ZQueryClienteBeforePost(DataSet: TDataSet);
+    procedure ZQueryTelBeforePost(DataSet: TDataSet);
+    procedure ZQueryEnderecoBeforePost(DataSet: TDataSet);
+    procedure btnCancelarClick(Sender: TObject);
+    procedure btnExcluirClick(Sender: TObject);
+    procedure btnEditarClick(Sender: TObject);
+    procedure ZQueryClienteAfterScroll(DataSet: TDataSet);
+    procedure EditBuscaChange(Sender: TObject);
+    procedure btnNovoEnderecoClick(Sender: TObject);
+    procedure btnDeletaEnderecoClick(Sender: TObject);
+    procedure DBEditTelefoneKeyPress(Sender: TObject; var Key: Char);
+    procedure DBEditCPFExit(Sender: TObject);
+    procedure DBEditCPFKeyPress(Sender: TObject; var Key: Char);
+    procedure ZQueryClienteAfterPost(DataSet: TDataSet);
+    procedure abreCampos();
+    procedure fechaCampos();
+    function verificaBrancos(): Boolean;
+    function isCPF(cpf: string): Boolean;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormCadastroClientes: TFormCadastroClientes;
+
+implementation
+
+{$R *.dfm}
+
+uses UnitDataModule, UnitCliente, UnitTelefone, UnitEndereco;
+
+//Habilita todos os campos para edição.
+procedure TFormCadastroClientes.abreCampos;
+begin
+  DBEditNome.Enabled := true;
+  DBEditCPF.Enabled := true;
+  DBEditEmail.Enabled := true;
+  DBEditTelefone.Enabled := true;
+  DBEditRua.Enabled := true;
+  DBEditNum.Enabled := true;
+  DBEditBairro.Enabled := true;
+  DBEditCidade.Enabled := true;
+  DBEditCEP.Enabled := true;
+  DBComboBoxUF.Enabled := true;
+end;
+
+//Cancela a edição ou inserção dos ZQuerys e habilita/desabilita os botões que podem
+//ser usados nesse estado.
+procedure TFormCadastroClientes.btnCancelarClick(Sender: TObject);
+begin
+  ZQueryCliente.Cancel;
+  ZQueryTel.Cancel;
+  ZQueryEndereco.Cancel;
+
+  btnEditar.Enabled := true;
+  btnNovo.Enabled := true;
+  btnSalvar.Enabled := false;
+  btnExcluir.Enabled := false;
+  btnCancelar.Enabled := false;
+  btnNovoEndereco.Enabled := false;
+  btnDeletaEndereco.Enabled := false;
+
+  fechaCampos;
+end;
+
+//Pergunta ao usuário e, se a resposta for positiva, deleta o campo selecionado
+//do ZQuery e habilita/desabilita os botões que podem ser usados nesse estado.
+procedure TFormCadastroClientes.btnDeletaEnderecoClick(Sender: TObject);
+begin
+  if (messageBox(HANDLE, 'Deseja realmente excluir esse endereço?', 'Excluir',
+                        MB_YESNO + MB_ICONQUESTION) = ID_YES) then
+    begin
+      ZQueryEndereco.Delete;
+
+      btnEditar.Enabled := true;
+      btnNovo.Enabled := true;
+      btnSalvar.Enabled := false;
+      btnExcluir.Enabled := false;
+      btnCancelar.Enabled := false;
+      btnNovoEndereco.Enabled := false;
+      btnDeletaEndereco.Enabled := false;
+
+      fechaCampos;
+    end;
+end;
+
+//Coloca o ZQuery em modo de edição e habilita/desabilita os botões que podem
+//ser usados nesse estado.
+procedure TFormCadastroClientes.btnEditarClick(Sender: TObject);
+begin
+  abreCampos;
+
+  ZQueryCliente.Edit;
+  ZQueryTel.Edit;
+  ZQueryEndereco.Edit;
+
+  btnEditar.Enabled := false;
+  btnNovo.Enabled := false;
+  btnSalvar.Enabled := true;
+  btnExcluir.Enabled := true;
+  btnCancelar.Enabled := true;
+  btnNovoEndereco.Enabled := true;
+  btnDeletaEndereco.Enabled := true;
+end;
+
+//Pergunta ao usuário e, se a resposta for positiva, deleta o campo selecionado
+//do ZQuery e habilita/desabilita os botões que podem ser usados nesse estado.
+procedure TFormCadastroClientes.btnExcluirClick(Sender: TObject);
+begin
+  if (messageBox(HANDLE, 'Deseja realmente excluir esse registro?', 'Excluir',
+                        MB_YESNO + MB_ICONQUESTION) = ID_YES) then
+    begin
+      ZQueryTel.Delete;
+      ZQueryEndereco.Delete;
+      ZQueryCliente.Delete;
+
+      btnEditar.Enabled := true;
+      btnNovo.Enabled := true;
+      btnSalvar.Enabled := false;
+      btnExcluir.Enabled := false;
+      btnCancelar.Enabled := false;
+      btnNovoEndereco.Enabled := false;
+      btnDeletaEndereco.Enabled := false;
+
+      fechaCampos;
+    end;
+end;
+
+//Coloca o ZQuery em modo de inserção e habilita/desabilita os botões que podem
+//ser usados nesse estado.
+procedure TFormCadastroClientes.btnNovoClick(Sender: TObject);
+begin
+    abreCampos;
+
+    ZQueryCliente.Insert;
+    ZQueryTel.Insert;
+    ZQueryEndereco.Insert;
+
+    btnNovo.Enabled := false;
+	  btnEditar.Enabled :=  false;
+	  btnExcluir.Enabled := false;
+	  btnSalvar.Enabled := true;
+	  btnCancelar.Enabled := true;
+    btnNovoEndereco.Enabled := false;
+    btnDeletaEndereco.Enabled := false;
+end;
+
+//Coloca o ZQuery em modo de edição e habilita/desabilita os botões que podem
+//ser usados nesse estado.
+procedure TFormCadastroClientes.btnNovoEnderecoClick(Sender: TObject);
+begin
+  ZQueryEndereco.Insert;
+  btnNovoEndereco.Enabled := false;
+  btnDeletaEndereco.Enabled := false;
+end;
+
+//Invoca a function de validação de campos em branco e, se estiver tudo preenchido,
+//salva os dados no banco e habilita/desabilita os botões que podem ser usados
+//nesse estado.
+procedure TFormCadastroClientes.btnSalvarClick(Sender: TObject);
+begin
+  if (VerificaBrancos) then
+    begin
+      ZQueryCliente.Post;
+      ZQueryTel.Post;
+      ZQueryEndereco.Post;
+
+      btnEditar.Enabled := true;
+      btnNovo.Enabled := true;
+      btnSalvar.Enabled := false;
+      btnExcluir.Enabled := false;
+      btnCancelar.Enabled := false;
+      btnNovoEndereco.Enabled := false;
+
+      fechaCampos;
+    end
+  else
+    begin
+      ShowMessage('Preencha os campos corretamente!');
+    end;
+end;
+
+//Invoca o método de validação do cpf quando o foco vai para outro campo.
+procedure TFormCadastroClientes.DBEditCPFExit(Sender: TObject);
+begin
+  if not isCPF(DBEditCPF.Text) then
+    ShowMessage('O CPF informado não é válido. Verifique!');
+end;
+
+//Permite que o usuário digite apenas números
+procedure TFormCadastroClientes.DBEditCPFKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  inherited;
+  if not (key in ['0'..'9',#8]) then
+    key:=#0;
+end;
+
+//Permite que o usuário digite apenas números
+procedure TFormCadastroClientes.DBEditTelefoneKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  inherited;
+  if not (key in ['0'..'9',#8]) then
+    key:=#0;
+end;
+
+//Realiza a busca de um cliente de acordo com os critérios Nome ou CPF.
+procedure TFormCadastroClientes.EditBuscaChange(Sender: TObject);
+begin
+  with ZQueryCliente do
+    begin
+      Close;
+      if RadioGroupCriterio.ItemIndex = 0 then
+        SQL.Text := 'select * from clientes where nome_cliente like :nome'
+      else
+        SQL.Text := 'select * from clientes where cpf_cliente like :nome';
+      ParamByName('nome').Value := '%' + EditBusca.Text + '%';
+      Open;
+    end;
+end;
+
+//Desabilita todos os campos.
+procedure TFormCadastroClientes.fechaCampos;
+begin
+  DBEditNome.Enabled := false;
+  DBEditCPF.Enabled := false;
+  DBEditEmail.Enabled := false;
+  DBEditTelefone.Enabled := false;
+  DBEditRua.Enabled := false;
+  DBEditNum.Enabled := false;
+  DBEditBairro.Enabled := false;
+  DBEditCidade.Enabled := false;
+  DBEditCEP.Enabled := false;
+  DBComboBoxUF.Enabled := false;
+end;
+
+//Verifica se o CPF é válido.
+function TFormCadastroClientes.isCPF(cpf: string): boolean;
+var  dig10, dig11: string;
+    s, i, r, peso: integer;
+begin
+// length - retorna o tamanho da string (CPF é um número formado por 11 dígitos)
+  if ((CPF = '00000000000') or (CPF = '11111111111') or
+      (CPF = '22222222222') or (CPF = '33333333333') or
+      (CPF = '44444444444') or (CPF = '55555555555') or
+      (CPF = '66666666666') or (CPF = '77777777777') or
+      (CPF = '88888888888') or (CPF = '99999999999') or
+      (length(CPF) <> 11))
+     then begin
+              isCPF := false;
+              exit;
+            end;
+
+// try - protege o código para eventuais erros de conversão de tipo na função StrToInt
+  try
+{ *-- Cálculo do 1o. Digito Verificador --* }
+    s := 0;
+    peso := 10;
+    for i := 1 to 9 do
+    begin
+// StrToInt converte o i-ésimo caractere do CPF em um número
+      s := s + (StrToInt(CPF[i]) * peso);
+      peso := peso - 1;
+    end;
+    r := 11 - (s mod 11);
+    if ((r = 10) or (r = 11))
+       then dig10 := '0'
+    else str(r:1, dig10); // converte um número no respectivo caractere numérico
+
+{ *-- Cálculo do 2o. Digito Verificador --* }
+    s := 0;
+    peso := 11;
+    for i := 1 to 10 do
+    begin
+      s := s + (StrToInt(CPF[i]) * peso);
+      peso := peso - 1;
+    end;
+    r := 11 - (s mod 11);
+    if ((r = 10) or (r = 11))
+       then dig11 := '0'
+    else str(r:1, dig11);
+
+{ Verifica se os digitos calculados conferem com os digitos informados. }
+    if ((dig10 = CPF[10]) and (dig11 = CPF[11]))
+       then isCPF := true
+    else isCPF := false;
+  except
+    isCPF := false
+  end;
+end;
+
+//Verifica se os campos essenciais foram preenchidos e retorna verdadeiro ou falso.
+function TFormCadastroClientes.verificaBrancos: Boolean;
+begin
+  if (DBEditNome.Text = '') OR (DBEditCPF.Text = '') OR (DBEditTelefone.Text = '')
+      OR (DBEditRua.Text = '') OR (DBEditNum.Text = '') OR (DBEditBairro.Text = '')
+      OR (DBEditCidade.Text = '') OR (DBEditCEP.Text = '') then
+    begin
+       Result := False;
+    end
+  else
+    begin
+      Result := True;
+    end;
+end;
+
+procedure TFormCadastroClientes.ZQueryClienteAfterPost(DataSet: TDataSet);
+begin
+  Application.MessageBox('Salvo com sucesso!', 'Cliente Salvo');
+end;
+
+//Toda vez que o foco de um cliente no DBGrid for alterado, também altera a exibição
+//do telefone e dos endereços, para o cliente correspondente.
+procedure TFormCadastroClientes.ZQueryClienteAfterScroll(DataSet: TDataSet);
+  var estado : boolean;
+begin
+  estado := ZQueryCliente.State in dsEditModes;
+  if not ZQueryCliente.IsEmpty AND not estado then
+    begin
+      with ZQueryEndereco do
+        begin
+          Close;
+          SQL.Text := 'select * from enderecos WHERE id_clientee = :idc';
+          ParamByName('idc').Value := StrToInt(ZQueryClienteid_cliente.Text);
+          Open;
+        end;
+
+      with ZQueryTel do
+        begin
+          Close;
+          SQL.Text := 'select * from telefones where id_clientet = :idtel';
+          ParamByName('idtel').Value := StrToInt(ZQueryClienteid_cliente.Text);
+          Open;
+        end;
+    end;
+end;
+
+//Passa os dados da classe pro ZQuery antes de salvar
+procedure TFormCadastroClientes.ZQueryClienteBeforePost(DataSet: TDataSet);
+  var cliente: TCliente;
+begin
+  cliente := TCliente.Create;
+  cliente.Nome := DBEditNome.Text;
+  cliente.CPF := DBEditCPF.Text;
+  cliente.Email := DBEditEmail.Text;
+
+  ZQueryCliente.FieldByName('nome_cliente').AsString := cliente.Nome;
+  ZQueryCliente.FieldByName('cpf_cliente').AsString := cliente.CPF;
+  ZQueryCliente.FieldByName('email_cliente').AsString := cliente.Email;
+end;
+
+//Passa os dados da classe pro ZQuery antes de salvar
+procedure TFormCadastroClientes.ZQueryEnderecoBeforePost(DataSet: TDataSet);
+  var endereco: TEndereco;
+begin
+  endereco := TEndereco.Create;
+  endereco.Rua := DBEditRua.Text;
+  endereco.Numero := DBEditNum.Text;
+  endereco.Bairro := DBEditBairro.Text;
+  endereco.Cidade := DBEditCidade.Text;
+  endereco.CEP := DBEditCEP.Text;
+  endereco.UF := DBComboBoxUF.Text;
+  endereco.ID_Cliente := StrToInt(ZQueryClienteid_cliente.Text);
+
+  ZQueryEndereco.FieldByName('rua_endereco').AsString := endereco.Rua;
+  ZQueryEndereco.FieldByName('num_endereco').AsString := endereco.Numero;
+  ZQueryEndereco.FieldByName('bairro_endereco').AsString := endereco.Bairro;
+  ZQueryEndereco.FieldByName('cidade_endereco').AsString := endereco.Cidade;
+  ZQueryEndereco.FieldByName('cep_endereco').AsString := endereco.CEP;
+  ZQueryEndereco.FieldByName('uf_endereco').AsString := endereco.UF;
+  ZQueryEndereco.FieldByName('id_clientee').AsInteger := endereco.ID_Cliente;
+
+end;
+
+//Passa os dados da classe pro ZQuery antes de salvar
+procedure TFormCadastroClientes.ZQueryTelBeforePost(DataSet: TDataSet);
+  var tel: TTelefone;
+begin
+  tel := TTelefone.Create;
+  tel.Numero := DBEditTelefone.Text;
+  tel.ID_Cliente := StrToInt(ZQueryClienteid_cliente.Text);
+
+  ZQueryTel.FieldByName('num_tel').AsString := tel.Numero;
+  ZQueryTel.FieldByName('id_clientet').AsInteger := tel.ID_Cliente;
+end;
+
+//Fecha o form e limpa a memória
+procedure TFormCadastroClientes.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  FormCadastroClientes := NIL;
+  Action := caFree;
+end;
+end.

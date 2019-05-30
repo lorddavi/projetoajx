@@ -1,0 +1,57 @@
+unit UnitProduto;
+
+interface
+  type
+    TProduto = class
+
+      private
+    FQtd: integer;
+    FValor: double;
+    FCodigo: string;
+    FID: integer;
+    FNome: string;
+    procedure SetCodigo(const Value: string);
+    procedure SetID(const Value: integer);
+    procedure SetNome(const Value: string);
+    procedure SetQtd(const Value: integer);
+    procedure SetValor(const Value: double);
+
+      published
+        property ID: integer read FID write SetID;
+        property Codigo: string read FCodigo write SetCodigo;
+        property Nome: string read FNome write SetNome;
+        property Qtd: integer read FQtd write SetQtd;
+        property Valor: double read FValor write SetValor;
+
+    end;
+
+implementation
+
+{ TProduto }
+
+procedure TProduto.SetCodigo(const Value: string);
+begin
+  FCodigo := Value;
+end;
+
+procedure TProduto.SetID(const Value: integer);
+begin
+  FID := Value;
+end;
+
+procedure TProduto.SetNome(const Value: string);
+begin
+  FNome := Value;
+end;
+
+procedure TProduto.SetQtd(const Value: integer);
+begin
+  FQtd := Value;
+end;
+
+procedure TProduto.SetValor(const Value: double);
+begin
+  FValor := Value;
+end;
+
+end.

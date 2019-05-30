@@ -1,0 +1,73 @@
+unit UnitCarrinho;
+
+interface
+  type
+    TCarrinho = class
+
+      private
+    FID_Produto: integer;
+    FQtd: integer;
+    FID_Venda: string;
+    FID: integer;
+    procedure SetID(const Value: integer);
+    procedure SetID_Produto(const Value: integer);
+    procedure SetID_Venda(const Value: string);
+    procedure SetQtd(const Value: integer);
+    function getID: integer;
+    function getID_Produto: integer;
+    function getID_Venda: string;
+    function getQtd: integer;
+
+      published
+        property ID: integer read getID write SetID;
+        property Qtd: integer read getQtd write SetQtd;
+        property ID_Venda: string read getID_Venda write SetID_Venda;
+        property ID_Produto: integer read getID_Produto write SetID_Produto;
+
+    end;
+
+implementation
+
+{ TCarrinho }
+
+function TCarrinho.getID: integer;
+begin
+  Result := FID;
+end;
+
+function TCarrinho.getID_Produto: integer;
+begin
+  Result := FID_Produto;
+end;
+
+function TCarrinho.getID_Venda: string;
+begin
+  Result := FID_Venda;
+end;
+
+function TCarrinho.getQtd: integer;
+begin
+  Result := FQtd;
+end;
+
+procedure TCarrinho.SetID(const Value: integer);
+begin
+  FID := Value;
+end;
+
+procedure TCarrinho.SetID_Produto(const Value: integer);
+begin
+  FID_Produto := Value;
+end;
+
+procedure TCarrinho.SetID_Venda(const Value: string);
+begin
+  FID_Venda := Value;
+end;
+
+procedure TCarrinho.SetQtd(const Value: integer);
+begin
+  FQtd := Value;
+end;
+
+end.
